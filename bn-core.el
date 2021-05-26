@@ -1,4 +1,4 @@
-;;; emacs-bn-core --- core functions for translating emacs to Bangla
+;;; bn-core --- core functions for translating emacs to Bangla
 ;;; commentary:
 ;;; copyright: Md Arif Shaikh
 ;;; code:
@@ -39,7 +39,7 @@
 (defcustom day-name-bn-alist nil
   "Assoc list of day names."
   :type 'alist
-  :group 'emacs-bn)
+  :group 'bn)
 
 (setq day-name-bn-alist '(("Mon" . "সোম")
 			  ("Tue" . "মঙ্গল")
@@ -56,7 +56,7 @@
 (defcustom month-name-bn-alist nil
   "Assoc list of month names."
   :type 'alist
-  :group 'emacs-bn)
+  :group 'bn)
 
 (setq month-name-bn-alist '(("Jan" . "জানুয়ারী")
 			    ("Feb" . "ফেব্রুয়ারী")
@@ -75,5 +75,5 @@
   "Translate MONTH-NAME to Bangla."
   (cdr (assoc month-name month-name-bn-alist)))
 
-(provide 'emacs-bn-core)
-;;; emacs-bn-core.el ends here
+(provide 'bn-core)
+;;; bn-core.el ends here
