@@ -12,7 +12,9 @@
 		    ("6" . "৬")
 		    ("7" . "৭")
 		    ("8" . "৮")
-		    ("9" . "৯")))
+		    ("9" . "৯")
+		    ("." . ".")
+		    ("%" . "%")))
 
 (defun digit-to-bn (digit)
   "Translate DIGIT to Bangla."

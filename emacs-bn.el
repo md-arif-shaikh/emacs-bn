@@ -3,6 +3,7 @@
 ;;; copyright: Md Arif Shaikh
 ;;; code:
 (require 'emacs-bn-core)
+(require 'battery)
 
 (defun bn-add-preceding-zero-to-date-time (bn-date-or-time)
   "Add a preceding zero to BN-DATE-OR-TIME."
@@ -38,6 +39,25 @@
   "Display time string in modeline in Bangla."
   :type 'list
   :group 'emacs-bn)
+
+(defun bn-battery-update ()
+  "Update battery status information in the mode line in Bangla."
+  (let* ((data (and battery-status-function (funcall battery-status-function)))
+         (percentage (car (read-from-string (cdr (assq ?p data))))))
+    (setq battery-mode-line-string
+	  (propertize (if (and battery-mode-line-format
+			       (numberp percentage)
+                               (<= percentage battery-mode-line-limit))
+			  (progn
+			    (setf (car (read-from-string (cdr (assq ?p data)))) (number-to-bn percentage))
+			    (battery-format battery-mode-line-format data))
+			"")
+		      'face
+                      (and (numberp percentage)
+                           (<= percentage battery-load-critical)
+                           'error)
+		      'help-echo "ব্যাটারী অবস্থা সম্পর্কিত তথ্য")))
+  (force-mode-line-update))
 
 (provide 'emacs-bn)
 ;;; emacs-bn.el ends here
