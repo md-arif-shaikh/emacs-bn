@@ -221,5 +221,110 @@ MIN-TO-APP is a list of minutes, as strings.  If ABBREV is non-nil, abbreviates 
 		      (if abbrev "মিনিটে "
 			(format "মিনিটে " (if (equal imin "1") "" ""))))))))
 
+(defun bn-org-agenda-format-date-aligned (date)
+  "Format a DATE string for display in the daily/weekly agenda.
+This function makes sure that dates are aligned for easy reading."
+  (require 'cal-iso)
+  (let* ((dayname (calendar-day-name date t))
+	 (day (cadr date))
+	 (day-of-week (calendar-day-of-week date))
+	 (month (car date))
+	 (monthname (calendar-month-name month t))
+	 (year (nth 2 date))
+	 (iso-week (org-days-to-iso-week
+		    (calendar-absolute-from-gregorian date)))
+	 (weekyear (cond ((and (= month 1) (>= iso-week 52))
+			  (1- year))
+			 ((and (= month 12) (<= iso-week 1))
+			  (1+ year))
+			 (t year)))
+	 (weekstring (if (= day-of-week 1)
+			 (format " (সপ্তাহ %02s)" (number-to-bn iso-week))
+		       "")))
+    (format "%s %s %s %s%s"
+	    (day-name-to-bn dayname) (number-to-bn day) (month-name-to-bn monthname) (number-to-bn year) weekstring)))
+
+(defcustom bn-org-agenda-overriding-header "আজকের কর্মসূচী:\n-------------"
+  "Org-agenda-overriding-header in Bangla."
+  :type 'string
+  :group 'bn)
+
+(defun bn-org-time (time-string)
+  "Format TIME-STRING for 'org-agenda'."
+  (let* ((hr (string-to-number (nth 0 (split-string time-string ":"))))
+	 (mn (string-to-number (nth 1 (split-string time-string ":"))))
+	 (bn-hr)
+	 (bn-mn)
+	 (part-of-day "সকাল"))
+    (cond ((and (> hr 12) (< hr 17))
+	   (setq part-of-day "বিকেল")
+	   (setq hr (- hr 12)))
+	  ((and (>= hr 17) (< hr 21))
+	   (setq part-of-day "সন্ধ্যে")
+	   (setq hr (- hr 12)))
+	  ((>= hr 21)
+	   (setq part-of-day "রাত্রি ")
+	   (setq hr (- hr 12)))
+	  ((= hr 12) (setq part-of-day "দুপুর ")))
+    (if (< mn 10)
+	(setq bn-mn (string-join (list "০" (number-to-bn mn))))
+      (setq bn-mn (number-to-bn mn))
+      )
+    (if (< hr 10)
+	(setq bn-hr (string-join (list "০" (number-to-bn hr))))
+      (setq bn-hr (number-to-bn hr))
+      )
+    (format "%s %s%s%s " part-of-day bn-hr ":" bn-mn)))
+
+(defun bn-org-agenda-prefix-format ()
+  "Prefix format for 'org-agenda' in Bangla."
+  (let ((scheduled (org-get-scheduled-time (point)))
+	(deadline (org-get-deadline-time (point))))
+    (if (or scheduled deadline)
+	(cond (scheduled (bn-org-time (format-time-string "%H:%M" scheduled)))
+	      (deadline (bn-org-time (format-time-string "%H:%M" deadline))))
+      (bn-org-time (format-time-string "%H:%M")))))
+
+(defcustom bn-org-agenda-scheduled-leaders
+  '("পূর্ব নির্ধারিত:  " "%2dx নির্ধারিত: ")
+  "Org agenda scheduled leaders in Bangla."
+  :type 'cons
+  :group 'bn)
+
+(defcustom bn-org-agenda-deadline-leaders
+  '("শেষ তারিখ:   " "%2d দিনের মধ্যে: "  "%2d দিন আগে: ")
+  "Org agenda deadline leaders in Bangla."
+  :type 'cons
+  :group 'bn)
+
+(defcustom bn-org-todo-keywords
+  '((sequence "করুন(k)" "|" "করা হয়ে গেছে(K)" "বাতিল করা হয়েছে(B)")
+    (sequence "যোগ দিন(j)" "|" "যোগ দেওয়া হয়েছে(J)" "যোগ দিতে পারিনি(U)")
+    (sequence "মিটিং(m)" "|" "মিটিং হয়ে গেছে(M)" "পিছোন হয়েছে(P)")
+    (sequence "পড়ুন(p)" "|" "পড়া হয়ে গেছে(S)")
+    (sequence "আলোচনা(a)" "|" "আলোচনা করা হয়েছে(A)"))
+  "TODO keywords in Bangla."
+  :type 'cons
+  :group 'bn)
+
+(defcustom bn-org-todo-keyword-faces
+  '(
+    ("করুন" . (:foreground "orange" :underline t :box nil  :weight extrabold))
+    ("যোগ দিন" . ( :foreground "orange" :underline t :box nil  :weight extrabold))
+    ("মিটিং" . ( :foreground "orange" :underline t :box nil  :weight extrabold))
+    ("পড়ুন" . ( :foreground "orange" :underline t :box nil  :weight extrabold))
+    ("আলোচনা" . ( :foreground "orange" :underline t :box nil  :weight extrabold))
+    ("বাতিল করা হয়েছে" . ( :foreground "gray50" :underline t :box nil))
+    ("করা হয়ে গেছে" . ( :foreground "gray50" :underline t :box nil))
+    ("যোগ দেওয়া হয়েছে" . ( :foreground "gray50" :underline t :box nil))
+    ("মিটিং হয়ে গেছে" . ( :foreground "gray50" :underline t :box nil))
+    ("পিছোন হয়েছে" . ( :foreground "gray50" :underline t :box nil))
+    ("পড়া হয়ে গেছে" . ( :foreground "gray50" :underline t :box nil))
+    ("আলোচনা করা হয়েছে" . ( :foreground "gray50" :underline t)))
+  "Faces for TODO keywords."
+  :type 'cons
+  :group 'bn)
+
+
 (provide 'bn)
 ;;; bn.el ends here
