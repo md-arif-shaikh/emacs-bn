@@ -203,5 +203,22 @@
  :type 'alist
  :group 'bn)
 
+(defun bn-appt-mode-line (min-to-app &optional abbrev)
+  "Return an appointment string suitable for use in the mode-line.
+MIN-TO-APP is a list of minutes, as strings.  If ABBREV is non-nil, abbreviates some text."
+  ;; All this silliness is just to make the formatting slightly nicer.
+  (let* ((multiple (> (length min-to-app) 1))
+	 (imin (if (or (not multiple)
+		       (not (delete (car min-to-app) min-to-app)))
+		   (car min-to-app))))
+    (format "%s%s %s"
+	    (if abbrev "এপয়েন্টমেন্ট" "এপয়েন্টমেন্ট")
+	    (if multiple "স" "")
+	    (if (equal imin "0") "এখন"
+	      (format "%s %s"
+		      (or (number-to-bn imin) (mapconcat #'identity (mapcar #'number-to-bn min-to-app) ","))
+		      (if abbrev "মিনিটে"
+			(format "মিনিটে" (if (equal imin "1") "" ""))))))))
+
 (provide 'bn)
 ;;; bn.el ends here
