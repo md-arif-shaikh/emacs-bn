@@ -198,7 +198,8 @@
    ("text"        "টেক্স্ট")
    ("latex" "লেটেক্স")
    ("pdf" "পিডিএফ")
-   ("view" "ভিউ"))
+   ("view" "ভিউ")
+   ("message" "মেসেজ"))
  "Cyphejor rules to show mode name in Bangla."
  :type 'alist
  :group 'bn)
@@ -214,11 +215,11 @@ MIN-TO-APP is a list of minutes, as strings.  If ABBREV is non-nil, abbreviates 
     (format "%s%s %s"
 	    (if abbrev "এপয়েন্টমেন্ট" "এপয়েন্টমেন্ট")
 	    (if multiple "স" "")
-	    (if (equal imin "0") "এখন"
+	    (if (equal imin "0") "এখন "
 	      (format "%s %s"
 		      (or (number-to-bn imin) (mapconcat #'identity (mapcar #'number-to-bn min-to-app) ","))
-		      (if abbrev "মিনিটে"
-			(format "মিনিটে" (if (equal imin "1") "" ""))))))))
+		      (if abbrev "মিনিটে "
+			(format "মিনিটে " (if (equal imin "1") "" ""))))))))
 
 (provide 'bn)
 ;;; bn.el ends here
