@@ -49,7 +49,7 @@
 			       (numberp percentage)
                                (<= percentage battery-mode-line-limit))
 			  (progn
-			    (setf (car (read-from-string (cdr (assq ?p data)))) (number-to-bn percentage))
+			    (setf (cdr (assq ?p data)) (number-to-bn percentage))
 			    (battery-format battery-mode-line-format data))
 			"")
 		      'face
