@@ -3,5 +3,5 @@
 #+EMAIL: arifshaikh.astro@gmail.com
 
 * About
-[./screenshots/bn-doom-modeline.png]
+[[./screenshots/bn-doom-modeline.png]]
 This is a collection of functions to display emacs in Bangla.
