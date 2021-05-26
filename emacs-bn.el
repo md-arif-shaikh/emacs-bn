@@ -37,7 +37,5 @@
 	bn-time-separator
 	(bn-add-preceding-zero-to-date-time (number-to-bn minutes))))
 
-(setq display-time-string-forms bn-display-time-string-fomrs)
-
 (provide 'emacs-bn)
 ;;; emacs-bn.el ends here
