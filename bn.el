@@ -2,7 +2,7 @@
 ;;; commentary:
 ;;; copyright: Md Arif Shaikh
 ;;; code:
-(require 'emacs-bn-core)
+(require 'bn-core)
 (require 'battery)
 (require 'doom-modeline)
 (require 'cyphejor)
