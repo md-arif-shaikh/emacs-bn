@@ -249,6 +249,12 @@ This function makes sure that dates are aligned for easy reading."
   :type 'string
   :group 'bn)
 
+(defcustom bn-org-agenda-current-time-string
+  " ---------------- এখন সময় --------------------"
+  "String for current time."
+  :type 'string
+  :group 'bn)
+
 (defun bn-org-time (time-string)
   "Format TIME-STRING for 'org-agenda'."
   (let* ((hr (string-to-number (nth 0 (split-string time-string ":"))))
