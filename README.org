@@ -1,0 +1,6 @@
+#+TITLE: Translate emacs to Bangla
+#+AUTHOR: Md Arif Shaikh
+#+EMAIL: arifshaikh.astro@gmail.com
+
+* About
+This is a collection of functions to display emacs in Bangla.
