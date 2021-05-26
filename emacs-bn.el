@@ -25,17 +25,19 @@
   :type 'boolean
   :group 'emacs-bn)
 
-(defvar bn-display-time-string-forms)
-(setq bn-display-time-string-fomrs
-      '((if bn-add-preceding-zero-to-date-time? (bn-add-preceding-zero-to-date-time (number-to-bn day)))
-	bn-date-separator
-	(month-name-to-bn monthname)
-	bn-date-separator
-	(number-to-bn (substring year -2))
-	" "
-	(number-to-bn 24-hours)
-	bn-time-separator
-	(bn-add-preceding-zero-to-date-time (number-to-bn minutes))))
+(defcustom bn-display-time-string-forms
+  '((if bn-add-preceding-zero-to-date-time? (bn-add-preceding-zero-to-date-time (number-to-bn day)))
+    bn-date-separator
+    (month-name-to-bn monthname)
+    bn-date-separator
+    (number-to-bn (substring year -2))
+    " "
+    (number-to-bn 24-hours)
+    bn-time-separator
+    (bn-add-preceding-zero-to-date-time (number-to-bn minutes)))
+  "Display time string in modeline in Bangla."
+  :type 'list
+  :group 'emacs-bn)
 
 (provide 'emacs-bn)
 ;;; emacs-bn.el ends here
