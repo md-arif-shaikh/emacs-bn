@@ -23,3 +23,15 @@ This is a collection of functions to display emacs in Bangla.
     (advice-add 'appt-mode-line :override #'bn-appt-mode-line))
   #+END_SRC
 [[./screenshots/bn-doom-modeline.png]]
+* Display org-agenda in Bangla
+#+BEGIN_SRC emacs-lisp
+  (setq org-agenda-prefix-format  "%(bn-org-agenda-prefix-format)%2s")
+  (setq org-agenda-overriding-header bn-org-agenda-overriding-header)
+  (setq org-agenda-format-date #'bn-org-agenda-format-date-aligned)
+  (setq org-todo-keyword-faces bn-org-todo-keyword-faces)
+  (setq org-todo-keywords bn-org-todo-keywords)
+  (setq org-agenda-scheduled-leaders bn-org-agenda-scheduled-leaders)
+  (setq org-agenda-deadline-leaders bn-org-agenda-deadline-leaders)
+  (setq org-agenda-current-time-string bn-org-agenda-current-time-string)
+#+END_SRC
+[[./screenshots/bn-org-agenda.png]]
