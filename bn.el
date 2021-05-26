@@ -127,6 +127,52 @@
                                 (flycheck-next-error 1))))
                           map))))))
 
+(defun bn-doom-modeline-update-battery-status ()
+  "Update battery status."
+  (setq doom-modeline--battery-status
+	(when (bound-and-true-p display-battery-mode)
+	  (let* ((data (and battery-status-function
+			    (functionp battery-status-function)
+			    (funcall battery-status-function)))
+		 (charging? (string-equal "AC" (cdr (assoc ?L data))))
+		 (percentage (car (read-from-string (or (cdr (assq ?p data)) "ERR"))))
+		 (valid-percentage? (and (numberp percentage)
+					 (>= percentage 0)
+					 (<= percentage battery-mode-line-limit)))
+		 (face (if valid-percentage?
+			   (cond (charging? 'doom-modeline-battery-charging)
+				 ((< percentage battery-load-critical) 'doom-modeline-battery-critical)
+				 ((< percentage 25) 'doom-modeline-battery-warning)
+				 ((< percentage 95) 'doom-modeline-battery-normal)
+				 (t 'doom-modeline-battery-full))
+			 'doom-modeline-battery-error))
+		 (icon (if valid-percentage?
+			   (cond (charging?
+				  (doom-modeline-icon 'alltheicon "battery-charging" "🔋" "+"
+						      :face face :height 1.4 :v-adjust -0.1))
+				 ((> percentage 95)
+				  (doom-modeline-icon 'faicon "battery-full" "🔋" "-"
+						      :face face :v-adjust -0.0575))
+				 ((> percentage 70)
+				  (doom-modeline-icon 'faicon "battery-three-quarters" "🔋" "-"
+						      :face face :v-adjust -0.0575))
+				 ((> percentage 40)
+				  (doom-modeline-icon 'faicon "battery-half" "🔋" "-"
+						      :face face :v-adjust -0.0575))
+				 ((> percentage battery-load-critical)
+				  (doom-modeline-icon 'faicon "battery-quarter" "🔋" "-"
+						      :face face :v-adjust -0.0575))
+				 (t (doom-modeline-icon 'faicon "battery-empty" "🔋" "!"
+							:face face :v-adjust -0.0575)))
+			 (doom-modeline-icon 'faicon "battery-empty" "⚠" "N/A"
+					     :face face :v-adjust -0.0575)))
+		 (text (if valid-percentage? (format "%s%%%%" (number-to-bn percentage)) ""))
+		 (help-echo (if (and battery-echo-area-format data valid-percentage?)
+				(battery-format battery-echo-area-format data)
+			      "Battery status not available")))
+	    (cons (propertize icon 'help-echo help-echo)
+		  (propertize text 'face face 'help-echo help-echo))))))
+
 (defcustom bn-cyphejor-rules
  '(:upcase
    ("bookmark"    "→")
@@ -153,7 +199,7 @@
    ("latex" "লেটেক্স")
    ("pdf" "পিডিএফ")
    ("view" "ভিউ"))
- "Cyphejor rules to show mode name in Bangla"
+ "Cyphejor rules to show mode name in Bangla."
  :type 'alist
  :group 'bn)
 
