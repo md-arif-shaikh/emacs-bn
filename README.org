@@ -3,5 +3,23 @@
 #+EMAIL: arifshaikh.astro@gmail.com
 
 * About
-[[./screenshots/bn-doom-modeline.png]]
 This is a collection of functions to display emacs in Bangla.
+* Displaying modeline in Bangla
+#+BEGIN_SRC emacs-lisp
+  (use-package cyphejor
+    :straight t)
+  (use-package bn
+    :straight (bn :type git :host github :repo "md-arif-shaikh/bn")
+    :config
+    (display-time-mode 1)
+    (display-battery-mode 1)
+    (setq bn-date-separator "-")
+    (setq display-time-string-forms bn-display-time-string-forms)
+    (setq cyphejor-rules bn-cyphejor-rules)
+    (cyphejor-mode 1)
+    ;;(advice-add 'battery-update :override #'bn-battery-update)
+    (advice-add 'doom-modeline-update-battery-status :override #'bn-doom-modeline-update-battery-status)
+    (advice-add 'doom-modeline-update-flycheck-text :override #'bn-doom-modeline-update-flycheck-text)
+    (advice-add 'appt-mode-line :override #'bn-appt-mode-line))
+  #+END_SRC
+[[./screenshots/bn-doom-modeline.png]]
