@@ -4,8 +4,6 @@
 ;;; code:
 (require 'bn-core)
 (require 'battery)
-(require 'doom-modeline)
-(require 'cyphejor)
 
 (defun bn-add-preceding-zero-to-date-time (bn-date-or-time)
   "Add a preceding zero to BN-DATE-OR-TIME."
@@ -330,7 +328,6 @@ This function makes sure that dates are aligned for easy reading."
   "Faces for TODO keywords."
   :type 'cons
   :group 'bn)
-
 
 (provide 'bn)
 ;;; bn.el ends here
