@@ -313,54 +313,14 @@ This function makes sure that dates are aligned for easy reading."
 				(with-selected-window (posn-window (event-start event))
                                   (flycheck-next-error 1))))
                             map))))))
-  
-  (defun bn-doom-modeline-update-battery-status ()
-    "Update battery status."
-    (setq doom-modeline--battery-status
-	  (when (bound-and-true-p display-battery-mode)
-	    (let* ((data (and battery-status-function
-			      (functionp battery-status-function)
-			      (funcall battery-status-function)))
-		   (charging? (string-equal "AC" (cdr (assoc ?L data))))
-		   (percentage (car (read-from-string (or (cdr (assq ?p data)) "ERR"))))
-		   (valid-percentage? (and (numberp percentage)
-					   (>= percentage 0)
-					   (<= percentage battery-mode-line-limit)))
-		   (face (if valid-percentage?
-			     (cond (charging? 'doom-modeline-battery-charging)
-				   ((< percentage battery-load-critical) 'doom-modeline-battery-critical)
-				   ((< percentage 25) 'doom-modeline-battery-warning)
-				   ((< percentage 95) 'doom-modeline-battery-normal)
-				   (t 'doom-modeline-battery-full))
-			   'doom-modeline-battery-error))
-		   (icon (if valid-percentage?
-			     (cond (charging?
-				    (doom-modeline-icon 'alltheicon "battery-charging" "🔋" "+"
-							:face face :height 1.4 :v-adjust -0.1))
-				   ((> percentage 95)
-				    (doom-modeline-icon 'faicon "battery-full" "🔋" "-"
-							:face face :v-adjust -0.0575))
-				   ((> percentage 70)
-				    (doom-modeline-icon 'faicon "battery-three-quarters" "🔋" "-"
-							:face face :v-adjust -0.0575))
-				   ((> percentage 40)
-				    (doom-modeline-icon 'faicon "battery-half" "🔋" "-"
-							:face face :v-adjust -0.0575))
-				   ((> percentage battery-load-critical)
-				    (doom-modeline-icon 'faicon "battery-quarter" "🔋" "-"
-							:face face :v-adjust -0.0575))
-				   (t (doom-modeline-icon 'faicon "battery-empty" "🔋" "!"
-							  :face face :v-adjust -0.0575)))
-			   (doom-modeline-icon 'faicon "battery-empty" "⚠" "N/A"
-					       :face face :v-adjust -0.0575)))
-		   (text (if valid-percentage? (format "%s%%%%" (number-to-bn percentage)) ""))
-		   (help-echo (if (and battery-echo-area-format data valid-percentage?)
-				  (battery-format battery-echo-area-format data)
-				"Battery status not available")))
-	      (cons (propertize icon 'help-echo help-echo)
-		    (propertize text 'face face 'help-echo help-echo))))))
 
-  (advice-add 'doom-modeline-update-battery-status :override #'bn-doom-modeline-update-battery-status)
+  (defun bn-doom-modeline-update-battery-status (x)
+    (let* ((icon (car x))
+	   (text (cdr x)))
+      (setq text (apply #'propertize (number-to-bn text) (text-properties-at 0 text)))
+      (setq doom-modeline--battery-status (cons icon text))))
+  
+  (advice-add 'doom-modeline-update-battery-status :filter-return #'bn-doom-modeline-update-battery-status)
   (advice-add 'doom-modeline-update-flycheck-text :override #'bn-doom-modeline-update-flycheck-text)
   ;; (advice-add 'battery-update :override #'bn-battery-update)
   (advice-add 'appt-mode-line :override #'bn-appt-mode-line)
