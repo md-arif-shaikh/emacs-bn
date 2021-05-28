@@ -172,53 +172,47 @@
 		  (propertize text 'face face 'help-echo help-echo))))))
 
 (defcustom bn-major-names
- '(("bookmark"    "→")
-   ("help" "হেল্প")
-   ("org" "অর্গ")
-   ("agenda" "এজেন্ডা")
-   ("magit" "ম্যাগিট")
-   ("status" "স্ট্যাটাস")
-   ("buffer"      "বাফার")
-   ("diff"        "ডিফ")
-   ("dired"       "ডায়ার্ড")
-   ("emacs-lisp-mode" "ইমাক্স-লিস্প")
-   ("inferior"    "i")
-   ("interaction" "ইন্টারেক্শন")
-   ("interactive" "ইন্টারেক্টিভ")
-   ("lisp"        "লিস্প")
-   ("menu"        "▤")
-   ("mode"        "")
-   ("package"     "↓")
-   ("python"      "পাইথন")
-   ("shell"       "শেল")
-   ("eshell" "ইশেল")
-   ("text"        "টেক্স্ট")
-   ("latex" "লেটেক্স")
-   ("pdf" "পিডিএফ")
-   ("view" "ভিউ")
-   ("message" "মেসেজ"))
+ '((help-mode "হেল্প")
+   (org-mode "অর্গ")
+   (org-agenda-mode "অর্গ-এজেন্ডা")
+   (magit-status-mode "ম্যাগিট-স্ট্যাটাস")
+   (dired-mode "ডায়ার্ড")
+   (lisp-interaction-mode "লিস্প ইন্টারএক্শন")
+   (emacs-lisp-mode "ইমাক্স-লিস্প")
+   (python-mode "পাইথন")
+   (shell-mode "শেল")
+   (eshell-mode "ইশেল")
+   (text-mode "টেক্স্ট")
+   (latex-mode "লেটেক্স")
+   (pdf-view-mode "পিডিএফ")
+   (message-mode "মেসেজ"))
  "Major mode names to show 'major-mode' name in Bangla."
  :type 'cons
  :group 'bn)
 
 (defcustom bn-minor-names
-  '(("company" "কোম্প্যানি")
-    ("yas" "ইয়াস")
-    ("which" "হু")
-    ("key" "কী")
-    ("ivy" "আইভি")
-    ("flycheck" "ফ্লাইচেক")
-    ("pair" "পেয়ার"))
+  '((company-mode " কোম্প্যানি ")
+    (yas-minor-mode " ইয়াস ")
+    (which-key-mode " হুইচ-কী ")
+    (ivy-mode " আইভি ")
+    (flycheck-mode " ফ্লাইচেক ")
+    (autopair-mode " অটো-পেয়ার "))
   "Minor mode names to show 'minor-mode' name in Bangla."
   :type 'cons
   :group 'bn)
 
-(defun bn-set-major-mode-names ()
+(defun bn-set-major-mode-name ()
   "Set 'major-mode' name to Bangla using the BN-MAJOR-NAMES."
-  (let ((bn-major-name (cdr (assoc major-mode bn-major-names))))
+  (let ((bn-major-name (cdr (assq major-mode bn-major-names))))
     (when bn-major-name
-      (setq mode-name bn-major-name))
-    mode-name))
+      (setq mode-name bn-major-name))))
+
+(defun bn-set-minor-mode-names ()
+  "Set 'minor-mode' names to Bangla using bn-minor-names."
+  (dolist (bn-minor bn-minor-names)
+    (assoc-delete-all (car bn-minor) minor-mode-alist)
+    (add-to-list 'minor-mode-alist bn-minor))
+  )
 
 (defun bn-appt-mode-line (min-to-app &optional abbrev)
   "Return an appointment string suitable for use in the mode-line.
