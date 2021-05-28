@@ -360,7 +360,7 @@ This function makes sure that dates are aligned for easy reading."
   (setq display-time-string-forms bn-display-time-string-forms)
   (add-hook 'after-change-major-mode-hook 'bn-set-major-mode-name)
   (bn-set-minor-mode-names)
-  (with-eval-after-load doom-modeline
+  (with-eval-after-load 'doom-modeline
     (advice-add 'doom-modeline-update-battery-status :override #'bn-doom-modeline-update-battery-status)
     (advice-add 'doom-modeline-update-flycheck-text :override #'bn-doom-modeline-update-flycheck-text))
   (unless (require 'doom-modeline)
