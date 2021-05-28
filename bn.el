@@ -196,7 +196,8 @@
     (which-key-mode " হুইচ-কী ")
     (ivy-mode " আইভি ")
     (flycheck-mode " ফ্লাইচেক ")
-    (autopair-mode " অটো-পেয়ার "))
+    (autopair-mode " অটো-পেয়ার ")
+    (eldoc-mode " এল-ডক "))
   "Minor mode names to show 'minor-mode' name in Bangla."
   :type 'cons
   :group 'bn)
@@ -213,6 +214,8 @@
     (assoc-delete-all (car bn-minor) minor-mode-alist)
     (add-to-list 'minor-mode-alist bn-minor))
   )
+
+minor-mode-alist
 
 (defun bn-appt-mode-line (min-to-app &optional abbrev)
   "Return an appointment string suitable for use in the mode-line.
