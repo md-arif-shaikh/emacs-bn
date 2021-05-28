@@ -197,7 +197,11 @@
     (ivy-mode " আইভি ")
     (flycheck-mode " ফ্লাইচেক ")
     (autopair-mode " অটো-পেয়ার ")
-    (eldoc-mode " এল-ডক "))
+    (eldoc-mode " এল-ডক ")
+    (diff-minor-mode " ডিফ ")
+    (company-mode " কোম্প্যানি ")
+    (all-the-icons-dired-mode  " অল-দ্য-আইকোনস্-ডায়ার্ড ")
+    (dired-omit-mode (:eval (if ... " অমিট" ""))))
   "Minor mode names to show 'minor-mode' name in Bangla."
   :type 'cons
   :group 'bn)
@@ -215,6 +219,8 @@
     (add-to-list 'minor-mode-alist bn-minor))
   )
 
+(dolist (min-mode minor-mode-alist)
+  (message "%s" min-mode))
 minor-mode-alist
 
 (defun bn-appt-mode-line (min-to-app &optional abbrev)
@@ -343,6 +349,32 @@ This function makes sure that dates are aligned for easy reading."
   "Faces for TODO keywords."
   :type 'cons
   :group 'bn)
+
+
+(define-minor-mode bn-mode
+  "Display modeline, org-agenda in Bangla"
+  :lighter " বাংলা "
+  (display-time-mode 1)
+  (display-battery-mode 1)
+  (setq bn-date-separator "-")
+  (setq display-time-string-forms bn-display-time-string-forms)
+  (add-hook 'after-change-major-mode-hook 'bn-set-major-mode-name)
+  (bn-set-minor-mode-names)
+  (with-eval-after-load doom-modeline
+    (advice-add 'doom-modeline-update-battery-status :override #'bn-doom-modeline-update-battery-status)
+    (advice-add 'doom-modeline-update-flycheck-text :override #'bn-doom-modeline-update-flycheck-text))
+  (unless (require 'doom-modeline)
+    (advice-add 'battery-update :override #'bn-battery-update))
+  (advice-add 'appt-mode-line :override #'bn-appt-mode-line)
+  ;; for org-agenda
+  (setq org-agenda-prefix-format  "%(bn-org-agenda-prefix-format)%2s")
+  (setq org-agenda-overriding-header bn-org-agenda-overriding-header)
+  (setq org-agenda-format-date #'bn-org-agenda-format-date-aligned)
+  (setq org-todo-keyword-faces bn-org-todo-keyword-faces)
+  (setq org-todo-keywords bn-org-todo-keywords)
+  (setq org-agenda-scheduled-leaders bn-org-agenda-scheduled-leaders)
+  (setq org-agenda-deadline-leaders bn-org-agenda-deadline-leaders)
+  (setq org-agenda-current-time-string bn-org-agenda-current-time-string))
 
 (provide 'bn)
 ;;; bn.el ends here
