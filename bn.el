@@ -197,7 +197,14 @@
    ("latex" "লেটেক্স")
    ("pdf" "পিডিএফ")
    ("view" "ভিউ")
-   ("message" "মেসেজ"))
+   ("message" "মেসেজ")
+   ("company" "কোম্প্যানি")
+   ("yas" "ইয়াস")
+   ("which" "হু")
+   ("key" "কী")
+   ("ivy" "আইভি")
+   ("flycheck" "ফ্লাইচেক")
+   ("pair" "পেয়ার"))
  "Cyphejor rules to show mode name in Bangla."
  :type 'alist
  :group 'bn)
