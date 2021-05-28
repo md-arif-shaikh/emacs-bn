@@ -171,9 +171,8 @@
 	    (cons (propertize icon 'help-echo help-echo)
 		  (propertize text 'face face 'help-echo help-echo))))))
 
-(defcustom bn-cyphejor-rules
- '(:upcase
-   ("bookmark"    "→")
+(defcustom bn-major-names
+ '(("bookmark"    "→")
    ("help" "হেল্প")
    ("org" "অর্গ")
    ("agenda" "এজেন্ডা")
@@ -182,32 +181,44 @@
    ("buffer"      "বাফার")
    ("diff"        "ডিফ")
    ("dired"       "ডায়ার্ড")
-   ("emacs"       "ইমাক্স")
-   ("inferior"    "i" :prefix)
-   ("interaction" "ইন্টারেক্শন" :prefix)
-   ("interactive" "ইন্টারেক্টিভ" :prefix)
-   ("lisp"        "লিস্প" :postfix)
-   ("menu"        "▤" :postfix)
+   ("emacs-lisp-mode" "ইমাক্স-লিস্প")
+   ("inferior"    "i")
+   ("interaction" "ইন্টারেক্শন")
+   ("interactive" "ইন্টারেক্টিভ")
+   ("lisp"        "লিস্প")
+   ("menu"        "▤")
    ("mode"        "")
    ("package"     "↓")
    ("python"      "পাইথন")
-   ("shell"       "শেল" :postfix)
+   ("shell"       "শেল")
    ("eshell" "ইশেল")
    ("text"        "টেক্স্ট")
    ("latex" "লেটেক্স")
    ("pdf" "পিডিএফ")
    ("view" "ভিউ")
-   ("message" "মেসেজ")
-   ("company" "কোম্প্যানি")
-   ("yas" "ইয়াস")
-   ("which" "হু")
-   ("key" "কী")
-   ("ivy" "আইভি")
-   ("flycheck" "ফ্লাইচেক")
-   ("pair" "পেয়ার"))
- "Cyphejor rules to show mode name in Bangla."
- :type 'alist
+   ("message" "মেসেজ"))
+ "Major mode names to show 'major-mode' name in Bangla."
+ :type 'cons
  :group 'bn)
+
+(defcustom bn-minor-names
+  '(("company" "কোম্প্যানি")
+    ("yas" "ইয়াস")
+    ("which" "হু")
+    ("key" "কী")
+    ("ivy" "আইভি")
+    ("flycheck" "ফ্লাইচেক")
+    ("pair" "পেয়ার"))
+  "Minor mode names to show 'minor-mode' name in Bangla."
+  :type 'cons
+  :group 'bn)
+
+(defun bn-set-major-mode-names ()
+  "Set 'major-mode' name to Bangla using the BN-MAJOR-NAMES."
+  (let ((bn-major-name (cdr (assoc major-mode bn-major-names))))
+    (when bn-major-name
+      (setq mode-name bn-major-name))
+    mode-name))
 
 (defun bn-appt-mode-line (min-to-app &optional abbrev)
   "Return an appointment string suitable for use in the mode-line.
