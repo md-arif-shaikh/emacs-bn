@@ -11,8 +11,8 @@ This is a collection of functions to display emacs in Bangla.
 #+END_SRC
 * Display modeline and org-agenda in bangla with doom-modeline installed
 ~(bn-set--bn-doom-display)~ in your config file.
-[[./screenshots/bn-modeline.png]]
-[[./screenshots/bn-modeline-with-vcs-appt.png]]
-./screenshots/bn-org-agenda.png]]
+#+html: <p align="center"><img src="screenshots/bn-modeline.png" /></p
+#+html: <p align="center"><img src="screenshots/bn-modeline-with-vcs-appt.png" /></p>
+#+html: <p align="center"><img src="screenshots/bn-org-agenda.png" /></p>
 * Without doom-modeline
   ~(bn-set--bn-display)~ in your config file.
