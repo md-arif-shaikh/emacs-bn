@@ -11,5 +11,5 @@ This is a collection of functions to display emacs in Bangla.
     :config
     (bn-extra-mode 1))
 #+END_SRC
-[[./screenshots/bn-doom-modeline.png]]
+[[./screenshots/bn-modeline.png]]
 [[./screenshots/bn-org-agenda.png]]
