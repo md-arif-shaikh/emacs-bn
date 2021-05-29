@@ -363,11 +363,12 @@ This function makes sure that dates are aligned for easy reading."
       (setq doom-modeline--battery-status (cons icon text))))
 
   (defun bn-doom-modeline-update-vcs-text (x)
-    (let* ((bn-vctext (cond ((equal x "main") "মেইন")
-			    ((equal x "master") "মাস্টার")
-			    (t x))))
-      (setq doom-modeline--vcs-text (apply #'propertize bn-vctext (text-properties-at 0 x)))
-      ))
+    (if (equal x nil)
+	(setq doom-modeline--vcs-text x)
+      (let* ((bn-vctext (cond ((equal x "main") "মেইন")
+			      ((equal x "master") "মাস্টার")
+			      (t x))))
+	(setq doom-modeline--vcs-text (apply #'propertize bn-vctext (text-properties-at 0 x))))))
   
   (advice-add 'doom-modeline-update-battery-status :filter-return #'bn-doom-modeline-update-battery-status)
   (advice-add 'doom-modeline-update-vcs-text :filter-return #'bn-doom-modeline-update-vcs-text)
@@ -407,3 +408,5 @@ This function makes sure that dates are aligned for easy reading."
 
 (provide 'bn)
 ;;; bn.el ends here
+
+(doom-modeline-update-vcs-text)
