@@ -79,8 +79,9 @@
  :group 'bn)
 
 (defcustom bn-minor-names
-  '((company-mode " কোম্পানি ")
-    (global-company-mode " গ্লোবল-কোম্পানি ")
+  '((company-search-mode " কোম্পানি-সার্চ ")
+    (company-mode " কোম্পানি ")
+    (global-company-mode " গ্লোবাল-কোম্পানি ")
     (yas-minor-mode " ইয়াস ")
     (which-key-mode " হুইচ-কী ")
     (ivy-mode " আইভি ")
