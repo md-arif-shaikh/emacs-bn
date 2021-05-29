@@ -1,7 +1,55 @@
-;;; bn --- core functions for translating emacs to Bangla
-;;; commentary:
-;;; copyright: Md Arif Shaikh
-;;; code:
+;;; bn.el --- package to display emacs in Bangla  -*- lexical-binding: t; -*-
+
+;; Copyright (C) 2021  Md Arif Shaikh
+
+;; Author: Md Arif Shaikh <arifshaikh.astro@gmail.com>
+;; Keywords:
+
+;; This program is free software; you can redistribute it and/or modify
+;; it under the terms of the GNU General Public License as published by
+;; the Free Software Foundation, either version 3 of the License, or
+;; (at your option) any later version.
+
+;; This program is distributed in the hope that it will be useful,
+;; but WITHOUT ANY WARRANTY; without even the implied warranty of
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;; GNU General Public License for more details.
+
+;; You should have received a copy of the GNU General Public License
+;; along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+;;; Commentary:
+
+;; This package provides fuctions to display numbers, dates, time etc in
+;; Bangla.
+
+;; Express modeline in Bangla:
+
+;; Using this package the modeline could be expressed in Bangla to a great
+;; extent.  Few additional functions are added to support doom-modeline.
+;; This could be activated with 'M-x bn-extra-mode'.  Features included in the
+;; modeline are:
+;; 1. major mode name in Bangla
+;; 2. minor mode name in Bangla
+;; 3. Battery status in Bangla
+;; 4. Time and date in Bangla
+;; 5. doom-modeline flycheck in Bangla
+
+;; Express org-agenda in Bangla.
+
+;; Additionally any custom functions can use functions from bn-core.el
+;; to express number, monthname, dayname to Bangla.
+
+;; INSTALL:
+;; It's not yet available in MELPA.  But you can install it using straight
+;; (use-package bn
+;;  :straight (bn :type git :host github :repo "md-arif-shaikh/emacs-bn")
+;;  :config
+;;  (bn-mode 1))
+;; if you have doom-modeline installed.  Use (bn-extra-mode) instead.
+
+;;; Code:
+
 (require 'bn-core)
 (require 'battery)
 
@@ -78,23 +126,24 @@
  :type 'cons
  :group 'bn)
 
-(defcustom bn-minor-names
-  '((company-search-mode " কোম্পানি-সার্চ ")
-    (company-mode " কোম্পানি ")
-    (global-company-mode " গ্লোবাল-কোম্পানি ")
-    (yas-minor-mode " ইয়াস ")
-    (which-key-mode " হুইচ-কী ")
-    (ivy-mode " আইভি ")
-    (flycheck-mode " ফ্লাইচেক ")
-    (autopair-mode " অটো-পেয়ার ")
-    (eldoc-mode " এল-ডক ")
-    (diff-minor-mode " ডিফ ")
-    (visual-line-mode " ভিজুয়াল-লাইন ")
-    (all-the-icons-dired-mode  " অল-দ্য-আইকোনস্-ডায়ার্ড ")
-    (dired-omit-mode (:eval (if ... " অমিট" ""))))
+(defcustom bn-minor-names '((company-mode " কোম্পানি  "))
   "Minor mode names to show 'minor-mode' name in Bangla."
   :type 'cons
   :group 'bn)
+
+(setq bn-minor-names '((company-search-mode " কোম্পানি-সার্চ ")
+		       (company-mode " কোম্পানি ")
+		       (global-company-mode " গ্লোবাল-কোম্পানি ")
+		       (yas-minor-mode " ইয়াস ")
+		       (which-key-mode " হুইচ-কী ")
+		       (ivy-mode " আইভি ")
+		       (flycheck-mode " ফ্লাইচেক ")
+		       (autopair-mode " অটো-পেয়ার ")
+		       (eldoc-mode " এল-ডক ")
+		       (diff-minor-mode " ডিফ ")
+		       (visual-line-mode " ভিজুয়াল-লাইন ")
+		       (all-the-icons-dired-mode  " অল-দ্য-আইকনস্-ডায়ার্ড ")
+		       (dired-omit-mode (:eval (if ... " অমিট" "")))))
 
 (defun bn-set-major-mode-name ()
   "Set 'major-mode' name to Bangla using the BN-MAJOR-NAMES."
@@ -353,7 +402,6 @@ This function makes sure that dates are aligned for easy reading."
   (setq org-agenda-scheduled-leaders bn-org-agenda-scheduled-leaders)
   (setq org-agenda-deadline-leaders bn-org-agenda-deadline-leaders)
   (setq org-agenda-current-time-string bn-org-agenda-current-time-string))
-
 
 (provide 'bn)
 ;;; bn.el ends here
