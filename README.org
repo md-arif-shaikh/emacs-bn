@@ -5,8 +5,8 @@
 * Table of Contents :TOC:
 - [[#about][About]]
 - [[#install-using-straight-and-use-package][Install using straight and use-package]]
-- [[#display-modeline-and-org-agenda-in-bangla-with-doom-modeline-installed][Display modeline and org-agenda in bangla with doom-modeline installed]]
-- [[#without-doom-modeline][Without doom-modeline]]
+- [[#display-modeline-in-bangla][Display modeline in Bangla]]
+- [[#display-org-agenda-in-bangla][Display org-agenda in Bangla]]
 
 * About
 This package provides a collection of functions to display emacs in Bangla.
@@ -28,10 +28,12 @@ This package provides a collection of functions to display emacs in Bangla.
   (use-package bn
     :straight (bn :type git :host github :repo "md-arif-shaikh/emacs-bn"))
 #+END_SRC
-* Display modeline and org-agenda in bangla with doom-modeline installed
-~(bn-set--bn-doom-display)~ in your config file.
+* Display modeline in Bangla
+If you have ~doom-modeline~ installed then add ~(bn-display--doom-modeline)~ in your config file.
 #+html: <p align="center"><img src="screenshots/bn-modeline.png" /></p
 #+html: <p align="center"><img src="screenshots/bn-modeline-with-vcs-appt.png" /></p>
+If you do not have ~doom-modeline~ the add ~(bn-display--modeline)~ in your config file.
+* Display org-agenda in Bangla
+Add ~(bn-display--org-agenda)~ in your config file.
 #+html: <p align="center"><img src="screenshots/bn-org-agenda.png" /></p>
-* Without doom-modeline
-  ~(bn-set--bn-display)~ in your config file.
+
