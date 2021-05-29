@@ -2,8 +2,27 @@
 #+AUTHOR: Md Arif Shaikh
 #+EMAIL: arifshaikh.astro@gmail.com
 
+* Table of Contents :TOC:
+- [[#about][About]]
+- [[#install-using-straight-and-use-package][Install using straight and use-package]]
+- [[#display-modeline-and-org-agenda-in-bangla-with-doom-modeline-installed][Display modeline and org-agenda in bangla with doom-modeline installed]]
+- [[#without-doom-modeline][Without doom-modeline]]
+
 * About
-This is a collection of functions to display emacs in Bangla.
+This package provides a collection of functions to display emacs in Bangla.
+  - It consists of core functions to display number, monthname, dayname
+    etc in Bangla.
+  - This  package provides custom functions to display the
+    modeline in Bangla. Using this package one should be able to
+    create custom modeline in Bangla. As a bonus this package takes
+    the excellent [[https://github.com/seagle0128/doom-modeline][doom-modeline]] and modifies it to show the modeline
+    in Bangla and hence if you already use ~doom-modeline~ package then
+    you have to do less to display your modeline in Bangla (see the
+    screenshots below).
+  - Using this package you can display your ~org-agenda~ in Bangla (see
+    the screenshot below).
+  - Using this package you should be able tweak, advice functions to
+    display your emacs in Bangla.
 * Install using straight and use-package
 #+BEGIN_SRC emacs-lisp
   (use-package bn

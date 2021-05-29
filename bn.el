@@ -34,6 +34,7 @@
 ;; 3. Battery status in Bangla
 ;; 4. Time and date in Bangla
 ;; 5. doom-modeline flycheck in Bangla
+;; 6. VCS text in modeline in Bangla
 
 ;; Express org-agenda in Bangla.
 
@@ -408,5 +409,3 @@ This function makes sure that dates are aligned for easy reading."
 
 (provide 'bn)
 ;;; bn.el ends here
-
-(doom-modeline-update-vcs-text)
