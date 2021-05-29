@@ -107,31 +107,33 @@
 		      'help-echo "ব্যাটারী অবস্থা সম্পর্কিত তথ্য")))
   (force-mode-line-update))
 
-(defcustom bn-major-names
- '((help-mode "হেল্প")
-   (org-mode "অর্গ")
-   (org-agenda-mode "অর্গ-এজেন্ডা")
-   (magit-status-mode "ম্যাগিট-স্ট্যাটাস")
-   (dired-mode "ডায়ার্ড")
-   (lisp-interaction-mode "লিস্প ইন্টারএক্শন")
-   (emacs-lisp-mode "ইমাক্স-লিস্প")
-   (python-mode "পাইথন")
-   (shell-mode "শেল")
-   (eshell-mode "ইশেল")
-   (text-mode "টেক্স্ট")
-   (latex-mode "লেটেক্স")
-   (pdf-view-mode "পিডিএফ")
-   (message-mode "মেসেজ"))
+(defcustom bn-major-names '((help-mode "হেল্প"))
  "Major mode names to show 'major-mode' name in Bangla."
  :type 'cons
  :group 'bn)
+
+(setq bn-major-names  '((help-mode "হেল্প")
+			(org-mode "অর্গ")
+			(org-agenda-mode "অর্গ-এজেন্ডা")
+			(magit-status-mode "ম্যাগিট-স্ট্যাটাস")
+			(dired-mode "ডায়ার্ড")
+			(lisp-interaction-mode "লিস্প ইন্টারএক্শন")
+			(emacs-lisp-mode "ইমাক্স-লিস্প")
+			(python-mode "পাইথন")
+			(shell-mode "শেল")
+			(eshell-mode "ইশেল")
+			(text-mode "টেক্স্ট")
+			(latex-mode "লেটেক্স")
+			(pdf-view-mode "পিডিএফ")
+			(message-mode "মেসেজ")))
 
 (defcustom bn-minor-names '((company-mode " কোম্পানি  "))
   "Minor mode names to show 'minor-mode' name in Bangla."
   :type 'cons
   :group 'bn)
 
-(setq bn-minor-names '((company-search-mode " কোম্পানি-সার্চ ")
+(setq bn-minor-names '((auto-revert-mode " অটো-রিভার্ট ")
+		       (company-search-mode " কোম্পানি-সার্চ ")
 		       (company-mode " কোম্পানি ")
 		       (global-company-mode " গ্লোবাল-কোম্পানি ")
 		       (yas-minor-mode " ইয়াস ")
