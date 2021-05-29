@@ -361,8 +361,17 @@ This function makes sure that dates are aligned for easy reading."
 	   (text (cdr x)))
       (setq text (apply #'propertize (number-to-bn text) (text-properties-at 0 text)))
       (setq doom-modeline--battery-status (cons icon text))))
+
+  (defun bn-doom-modeline-update-vcs-text (x)
+    (let* ((vctext (doom-modeline-update-vcs-text))
+	   (bn-vctext (cond ((equal vctext "main") "মেইন")
+			    ((equal vctext "master") "মাস্টার")
+			    (t vctext))))
+      (setq doom-modeline--vcs-text (apply #'propertize bn-vctext (text-properties-at 0 vctext)))
+      ))
   
   (advice-add 'doom-modeline-update-battery-status :filter-return #'bn-doom-modeline-update-battery-status)
+  (advice-add 'doom-modeline-update-vcs-text :filter-return #'bn-doom-modeline-update-vcs-text)
   (advice-add 'doom-modeline-update-flycheck-text :override #'bn-doom-modeline-update-flycheck-text)
   ;; (advice-add 'battery-update :override #'bn-battery-update)
   (advice-add 'appt-mode-line :override #'bn-appt-mode-line)
