@@ -14,10 +14,10 @@ This package provides a collection of functions to display emacs in Bangla.
     etc in Bangla.
   - This  package provides custom functions to display the
     modeline in Bangla. Using this package one should be able to
-    create custom modeline in Bangla. As a bonus this package takes
-    the excellent [[https://github.com/seagle0128/doom-modeline][doom-modeline]] and modifies it to show the modeline
+    create custom modeline in Bangla. As a bonus this package provides
+    advice to the excellent [[https://github.com/seagle0128/doom-modeline][doom-modeline]] to show the modeline
     in Bangla and hence if you already use ~doom-modeline~ package then
-    you have to do less to display your modeline in Bangla (see the
+    you have to do less to have a beautiful modeline in Bangla (see the
     screenshots below).
   - Using this package you can display your ~org-agenda~ in Bangla (see
     the screenshot below).

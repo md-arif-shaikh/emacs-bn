@@ -282,7 +282,7 @@ This function makes sure that dates are aligned for easy reading."
   :group 'bn)
 
 
-(defun bn-set--bn-doom-display ()
+(defun bn-display--doom-modeline ()
   "Set Bangla display with doom-modeline."
   (interactive)
   (display-time-mode 1)
@@ -375,18 +375,9 @@ This function makes sure that dates are aligned for easy reading."
   (advice-add 'doom-modeline-update-vcs-text :filter-return #'bn-doom-modeline-update-vcs-text)
   (advice-add 'doom-modeline-update-flycheck-text :override #'bn-doom-modeline-update-flycheck-text)
   ;; (advice-add 'battery-update :override #'bn-battery-update)
-  (advice-add 'appt-mode-line :override #'bn-appt-mode-line)
-  ;; for org-agenda
-  (setq org-agenda-prefix-format  "%(bn-org-agenda-prefix-format)%2s")
-  (setq org-agenda-overriding-header bn-org-agenda-overriding-header)
-  (setq org-agenda-format-date #'bn-org-agenda-format-date-aligned)
-  (setq org-todo-keyword-faces bn-org-todo-keyword-faces)
-  (setq org-todo-keywords bn-org-todo-keywords)
-  (setq org-agenda-scheduled-leaders bn-org-agenda-scheduled-leaders)
-  (setq org-agenda-deadline-leaders bn-org-agenda-deadline-leaders)
-  (setq org-agenda-current-time-string bn-org-agenda-current-time-string))
+  (advice-add 'appt-mode-line :override #'bn-appt-mode-line))
 
-(defun bn-set--bn-display ()
+(defun bn-display--modeline ()
   "Display modeline, 'org-agenda' in Bangla."
   (interactive)
   (display-time-mode 1)
@@ -396,8 +387,10 @@ This function makes sure that dates are aligned for easy reading."
   (add-hook 'after-change-major-mode-hook 'bn-set-major-mode-name)
   (bn-set-minor-mode-names)
   (advice-add 'battery-update :override #'bn-battery-update)
-  (advice-add 'appt-mode-line :override #'bn-appt-mode-line)
-  ;; for org-agenda
+  (advice-add 'appt-mode-line :override #'bn-appt-mode-line))
+
+(defun bn-display--org-agenda ()
+  "Display 'org-agenda' in Bangla."
   (setq org-agenda-prefix-format  "%(bn-org-agenda-prefix-format)%2s")
   (setq org-agenda-overriding-header bn-org-agenda-overriding-header)
   (setq org-agenda-format-date #'bn-org-agenda-format-date-aligned)
