@@ -284,9 +284,8 @@ This function makes sure that dates are aligned for easy reading."
   :group 'bn)
 
 
-(define-minor-mode bn-extra-mode
-  "Display modeline, org-agenda in Bangla"
-  :lighter " বাংলা "
+(defun bn-set--bn-doom-display ()
+  "Set Bangla display with doom-modeline."
   (display-time-mode 1)
   (display-battery-mode 1)
   (setq bn-date-separator "-")
@@ -379,10 +378,8 @@ This function makes sure that dates are aligned for easy reading."
   (setq org-agenda-deadline-leaders bn-org-agenda-deadline-leaders)
   (setq org-agenda-current-time-string bn-org-agenda-current-time-string))
 
-
-(define-minor-mode bn-mode
-  "Display modeline, org-agenda in Bangla"
-  :lighter " বাংলা "
+(defun bn-set--bn-display ()
+  "Display modeline, 'org-agenda' in Bangla."
   (display-time-mode 1)
   (display-battery-mode 1)
   (setq bn-date-separator "-")
@@ -400,6 +397,8 @@ This function makes sure that dates are aligned for easy reading."
   (setq org-agenda-scheduled-leaders bn-org-agenda-scheduled-leaders)
   (setq org-agenda-deadline-leaders bn-org-agenda-deadline-leaders)
   (setq org-agenda-current-time-string bn-org-agenda-current-time-string))
+
+(bn-set--bn-display)
 
 (provide 'bn)
 ;;; bn.el ends here
