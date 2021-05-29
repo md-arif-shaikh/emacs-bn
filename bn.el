@@ -87,7 +87,7 @@
     (autopair-mode " অটো-পেয়ার ")
     (eldoc-mode " এল-ডক ")
     (diff-minor-mode " ডিফ ")
-    (company-mode " কোম্প্যানি ")
+    (visual-line-mode " ভিজুয়াল-লাইন ")
     (all-the-icons-dired-mode  " অল-দ্য-আইকোনস্-ডায়ার্ড ")
     (dired-omit-mode (:eval (if ... " অমিট" ""))))
   "Minor mode names to show 'minor-mode' name in Bangla."
@@ -106,10 +106,6 @@
     (assoc-delete-all (car bn-minor) minor-mode-alist)
     (add-to-list 'minor-mode-alist bn-minor))
   )
-
-(dolist (min-mode minor-mode-alist)
-  (message "%s" min-mode))
-minor-mode-alist
 
 (defun bn-appt-mode-line (min-to-app &optional abbrev)
   "Return an appointment string suitable for use in the mode-line.
