@@ -43,10 +43,7 @@
 ;; INSTALL:
 ;; It's not yet available in MELPA.  But you can install it using straight
 ;; (use-package bn
-;;  :straight (bn :type git :host github :repo "md-arif-shaikh/emacs-bn")
-;;  :config
-;;  (bn-mode 1))
-;; if you have doom-modeline installed.  Use (bn-extra-mode) instead.
+;;  :straight (bn :type git :host github :repo "md-arif-shaikh/emacs-bn"))
 
 ;;; Code:
 
@@ -397,8 +394,6 @@ This function makes sure that dates are aligned for easy reading."
   (setq org-agenda-scheduled-leaders bn-org-agenda-scheduled-leaders)
   (setq org-agenda-deadline-leaders bn-org-agenda-deadline-leaders)
   (setq org-agenda-current-time-string bn-org-agenda-current-time-string))
-
-(bn-set--bn-display)
 
 (provide 'bn)
 ;;; bn.el ends here
