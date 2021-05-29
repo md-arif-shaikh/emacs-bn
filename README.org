@@ -1,37 +1,15 @@
-#+TITLE: Display emacs to Bangla
+#+TITLE: Display emacs in Bangla
 #+AUTHOR: Md Arif Shaikh
 #+EMAIL: arifshaikh.astro@gmail.com
 
 * About
 This is a collection of functions to display emacs in Bangla.
-* Displaying modeline in Bangla
+* Displaying modeline and org-agenda in Bangla
 #+BEGIN_SRC emacs-lisp
-  (use-package cyphejor
-    :straight t)
   (use-package bn
-    :straight (bn :type git :host github :repo "md-arif-shaikh/bn")
+    :straight (bn :type git :host github :repo "md-arif-shaikh/emacs-bn")
     :config
-    (display-time-mode 1)
-    (display-battery-mode 1)
-    (setq bn-date-separator "-")
-    (setq display-time-string-forms bn-display-time-string-forms)
-    (setq cyphejor-rules bn-cyphejor-rules)
-    (cyphejor-mode 1)
-    ;;(advice-add 'battery-update :override #'bn-battery-update)
-    (advice-add 'doom-modeline-update-battery-status :override #'bn-doom-modeline-update-battery-status)
-    (advice-add 'doom-modeline-update-flycheck-text :override #'bn-doom-modeline-update-flycheck-text)
-    (advice-add 'appt-mode-line :override #'bn-appt-mode-line))
-  #+END_SRC
-[[./screenshots/bn-doom-modeline.png]]
-* Display org-agenda in Bangla
-#+BEGIN_SRC emacs-lisp
-  (setq org-agenda-prefix-format  "%(bn-org-agenda-prefix-format)%2s")
-  (setq org-agenda-overriding-header bn-org-agenda-overriding-header)
-  (setq org-agenda-format-date #'bn-org-agenda-format-date-aligned)
-  (setq org-todo-keyword-faces bn-org-todo-keyword-faces)
-  (setq org-todo-keywords bn-org-todo-keywords)
-  (setq org-agenda-scheduled-leaders bn-org-agenda-scheduled-leaders)
-  (setq org-agenda-deadline-leaders bn-org-agenda-deadline-leaders)
-  (setq org-agenda-current-time-string bn-org-agenda-current-time-string)
+    (bn-extra-mode 1))
 #+END_SRC
+[[./screenshots/bn-doom-modeline.png]]
 [[./screenshots/bn-org-agenda.png]]
