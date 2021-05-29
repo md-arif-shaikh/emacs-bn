@@ -283,6 +283,7 @@ This function makes sure that dates are aligned for easy reading."
 
 (defun bn-set--bn-doom-display ()
   "Set Bangla display with doom-modeline."
+  (interactive)
   (display-time-mode 1)
   (display-battery-mode 1)
   (setq bn-date-separator "-")
@@ -377,6 +378,7 @@ This function makes sure that dates are aligned for easy reading."
 
 (defun bn-set--bn-display ()
   "Display modeline, 'org-agenda' in Bangla."
+  (interactive)
   (display-time-mode 1)
   (display-battery-mode 1)
   (setq bn-date-separator "-")
